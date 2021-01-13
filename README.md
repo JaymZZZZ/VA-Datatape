@@ -1,4 +1,4 @@
-# VA-Datatape
+# VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
 All you need to do to use it is:
@@ -15,3 +15,5 @@ All you need to do to use it is:
   
   
 Note: inline.vb file listed here is for informational purposes to show you the inner workings of the script. When you import the .vab file, the inline file is pre-loaded. 
+
+Note 2: This plugin only works for the F-16C Viper at this time. More aircraft can be added, time permitting. 
