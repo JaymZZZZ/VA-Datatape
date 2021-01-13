@@ -21,7 +21,7 @@ Note 2: This plugin only works for the F-16C Viper at this time. More aircraft c
 
 
 ## Credits/Shoutouts:
-* This module iuses components from "DCS F-16C Viper VoiceAttack by Bailey v2.0.0" found at https://www.digitalcombatsimulator.com/en/files/3306505/
+* This module uses components from "DCS F-16C Viper VoiceAttack by Bailey v2.0.0" found at https://www.digitalcombatsimulator.com/en/files/3306505/
 
 
 ## License 
