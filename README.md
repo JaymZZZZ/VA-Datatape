@@ -17,3 +17,10 @@ All you need to do to use it is:
 Note: inline.vb file listed here is for informational purposes to show you the inner workings of the script. When you import the .vab file, the inline file is pre-loaded. 
 
 Note 2: This plugin only works for the F-16C Viper at this time. More aircraft can be added, time permitting. 
+
+
+Credits/Shoutouts:
+* This module iuses components from "DCS F-16C Viper VoiceAttack by Bailey v2.0.0" found at https://www.digitalcombatsimulator.com/en/files/3306505/
+
+
+LICENSE: Apache 2.0 License (do what you want with it, just make sure to give me and Bailey credit)
