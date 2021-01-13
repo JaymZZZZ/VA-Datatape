@@ -8,3 +8,6 @@ All you need to do to use it is:
   * C:\Users\YOUR_USER\Saved Games\DCS.Openbeta\Datatape\datatape.txt
   * C:\Users\YOUR_USER\Saved Games\DCS\Datatape\datatape.txt
   * C:\Program Files (x86)\VoiceAttack\Datatape\datatape.txt
+  
+  
+Note: inline.vb file listed here is for informational purposes to show you the inner workings of the script. When you import the .vab file, the inline file is pre-loaded. 
