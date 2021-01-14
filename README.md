@@ -27,7 +27,7 @@ All you need to do to use it is:
 ## Notes
 * inline.vb file listed here is for informational purposes to show you the inner workings of the script. When you import the .vab file, the inline file is pre-loaded. 
 * This profiles only works for the F-16C Viper at this time. More aircraft can be added, time permitting. 
-* This profiles can cause conflict with heavily modified profiles and will almost certainly have issues if you have remaped your ICP buttons to use anything other than "L Ctrl + NumPad X"
+* **This profile can cause conflict with heavily modified profiles and will almost certainly have issues if you have remapped your ICP buttons to use anything other than "L Ctrl + NumPad X"**
 
 
 ## Credits/Shoutouts:
