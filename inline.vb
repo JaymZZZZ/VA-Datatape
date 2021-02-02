@@ -49,7 +49,9 @@ Public Class VAInline
 	
 	for each line as string in File.ReadLines(datatape_file)
 
-		If line.contains("1:") = False Then
+		Dim rowdata As String() = line.Split(New Char() {":"c})
+
+		If rowdata(0) <> "1" Then
 		
 			line = line.replace("	", " ").replace("     ", " ").replace("    ", " ").replace("   ", " ").replace("  ", " ")
 			line = line.replace("'","").replace(":","").replace("""", "").replace("FT","").replace("/", " ").replace("\", " ")
