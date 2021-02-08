@@ -37,10 +37,10 @@ All you need to do to use it is:
  
 ## Usage
 There are 4 total voice commands:
-`Load Datatape` - This command will load all uncommented steerpoints the default `datatape_txt` file
-`Load Datatape Steerpoint <NUMBER>` - This command will only load steerpoint X (example 3) from the default `datatape_txt` file
-`Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike>` - This command will load all steerpoints any file matching the name you called. For example if you say "load datatape file bravo" it will look for a file named `datatape_bravo_*.txt`. You can customize the name of the file as long as you leave the first part the way it needs to be
-`Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike> Steerpoint <NUMBER>` - This command will load only the specific steerpoint from any file matching the name you called. 
+* `Load Datatape` - This command will load all uncommented steerpoints the default `datatape_txt` file
+* `Load Datatape Steerpoint <NUMBER>` - This command will only load steerpoint X (example 3) from the default `datatape_txt` file
+* `Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike>` - This command will load all steerpoints any file matching the name you called. For example if you say "load datatape file bravo" it will look for a file named `datatape_bravo_*.txt`. You can customize the name of the file as long as you leave the first part the way it needs to be
+* `Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike> Steerpoint <NUMBER>` - This command will load only the specific steerpoint from any file matching the name you called. 
 
   
 ## Notes
