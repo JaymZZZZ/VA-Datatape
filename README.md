@@ -1,6 +1,18 @@
 # VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
+## New Features in 0.0.4
+I have added a few new features and commands that will make things even better:
+1) You can comment out individual rows in the datatape file be prepending it with a `#`
+2) You can insert inline comments on the end of any line surrounded by `[]`
+3) Multi file support - You can create and call up to 13 different files with semi-custom names in the format
+`datatape_<alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike>_<ANYTHING_YOU_WANT>.txt`
+  * Examples
+    * datatape_alpha_pattern_practice.txt
+    * datatape_bravo_bombing_run.txt
+    * datatape_charlie_ILS_practice.txt
+4) You can dynamically edit the datatape text files and recall them without restarting VA or DCS
+
 ## Installation
 All you need to do to use it is:
 
@@ -23,6 +35,13 @@ All you need to do to use it is:
   * Click OK on all pop up windows
   * Click "Apply" in the bottom right of the options window
  
+## Usage
+There are 4 total voice commands:
+`Load Datatape` - This command will load all uncommented steerpoints the default `datatape_txt` file
+`Load Datatape Steerpoint <NUMBER>` - This command will only load steerpoint X (example 3) from the default `datatape_txt` file
+`Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike>` - This command will load all steerpoints any file matching the name you called. For example if you say "load datatape file bravo" it will look for a file named `datatape_bravo_*.txt`. You can customize the name of the file as long as you leave the first part the way it needs to be
+`Load Datatape file <alpha|bravo|charlie|delta|echo|foxtrot|golf|hotel|india|juliet|kilo|lima|mike> Steerpoint <NUMBER>` - This command will load only the specific steerpoint from any file matching the name you called. 
+
   
 ## Notes
 * inline.vb file listed here is for informational purposes to show you the inner workings of the script. When you import the .vab file, the inline file is pre-loaded. 
