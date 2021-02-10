@@ -25,15 +25,11 @@ All you need to do to use it is:
 3) If you are already using an existing profile. Configure your existing profile to include the DataTape profile by:
  * Click "Edit Profile" (Alt + E) on your existing profile
  * Next to the profile name, click on "Options"
-
-4) Use one of the two voice commands:
-  * "Load Datatape" - loads all steerpoints in the file
-  * "Load Datatape waypoint X" - loads only steerpoint X from the file
-  * In the popup window, click the "..." button next to "Include Commands from other Profiles"
-  * In the next popup, click the plus sign
-  * Select the "Datatype vX.X.X" profile
-  * Click OK on all pop up windows
-  * Click "Apply" in the bottom right of the options window
+ * In the popup window, click the "..." button next to "Include Commands from other Profiles"
+ * In the next popup, click the plus sign
+ * Select the "Datatype vX.X.X" profile
+ * Click OK on all pop up windows
+ * Click "Apply" in the bottom right of the options window
  
 ## Usage
 There are 4 total voice commands:
