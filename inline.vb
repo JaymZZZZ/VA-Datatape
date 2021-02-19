@@ -90,27 +90,6 @@ Public Class VAInline
 		VA.WriteToLog("Could not locate compatible datatape file", "red")
 		return
 	end if
-	
-	'If a previous file had more steerpoints, we need to clear them out. This will null them
-	while pos < 101
-		current_pos = VA.GetText("waypoint_"+pos.toString())
-		if current_pos <> "" then 
-			if VA.getText("latitude_"+pos.toString()) = "20000000" then
-				VA.SetText("waypoint_"+pos.toString(), nothing)
-				VA.SetText("latitude_"+pos.toString(), nothing)
-				VA.SetText("longitude_"+pos.toString(), nothing)
-				VA.SetText("altitude_"+pos.toString(), nothing)
-			else
-				VA.SetText("latitude_"+pos.toString(), "20000000")
-				VA.SetText("longitude_"+pos.toString(), "400000000")
-				VA.SetText("altitude_"+pos.toString(), "0")
-			end if
-		end if
-		pos = pos + 1
-	end while
-	
-	' reset position so we can clean up some data later
-	pos = 2
 		
 	' Main loop. Read the file, trim some fat, and get it plugged into vars	
 	VA.WriteToLog("Reading from datatape file: "+ datatape_file, "blue")
@@ -128,7 +107,8 @@ Public Class VAInline
 			If rowdata(0) <> "1" Then
 			
 				' Just in case there are typos, trim them out 
-				line = line.replace("	", " ").replace("     ", " ").replace("    ", " ").replace("   ", " ").replace("  ", " ")
+				line = line.trim()
+				line = Regex.Replace(line, " {2,}", " ")
 				line = line.replace("'","").replace(":","").replace("""", "").replace("FT","").replace("/", " ").replace("\", " ")
 			
 				Dim values As String() = line.Split(New Char() {" "c})
