@@ -1,6 +1,9 @@
 # VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
+## New Features in 0.0.6
+1) Fixed a bug with multiple spaces or trailing spaces breaking profile
+
 ## New Features in 0.0.4
 I have added a few new features and commands that will make things even better:
 1) You can comment out individual rows in the datatape file be prepending it with a `#`
