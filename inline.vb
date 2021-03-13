@@ -94,13 +94,13 @@ Public Class VAInline
 				End If
 			End If
 		Else
-			datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "_*.json")
+			datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "*.json")
 			If datatape_file <> "" then
 				datatape_file = datatape_dir + "\" + datatape_file
 				file_found = true
 				json_file_found = true
 			Else 
-				datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "_*.txt")
+				datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "*.txt")
 				If datatape_file <> "" then
 					datatape_file = datatape_dir + "\" + datatape_file
 					file_found = true
@@ -110,7 +110,11 @@ Public Class VAInline
 		
 		' No files were found and this is bad. Show instructions on what to do. 
 		If file_found = false then
-			VA.WriteToLog("Advanced File Format: datatape_alpha_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			If file_code <> nothing then
+				VA.WriteToLog("Advanced File Format: datatape_"+file_code+"_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			Else
+				VA.WriteToLog("Advanced File Format: datatape_alpha_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			End If
 			VA.WriteToLog("Basic File Format: datatape.txt", "red")
 			VA.WriteToLog("File name must match one of the following formats:", "red")
 			VA.WriteToLog("Could not locate compatible datatape file", "red")
@@ -145,7 +149,7 @@ Public Class VAInline
 						Dim latitude as string = ConvertLatToDM(formatted_lat)
 						Dim longitude as string = ConvertLongToDM(formatted_lng)
 						Dim waypoint as string = stpt
-						Dim altitude as string = "15000"
+						Dim altitude as string = "0"
 						' Write to logs and set the variables
 						VA.SetText("waypoint_"+waypoint, waypoint)
 						VA.SetText("latitude_"+waypoint, latitude)
