@@ -1,6 +1,9 @@
 # VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
+## New Features in 0.0.7
+1) Support for CombatFlite JSON exports
+
 ## New Features in 0.0.6
 1) Fixed a bug with multiple spaces or trailing spaces breaking profile
 
@@ -24,8 +27,19 @@ All you need to do to use it is:
   * C:\Users\YOUR_USER\Saved Games\DCS.Openbeta\Datatape\datatape.txt
   * C:\Users\YOUR_USER\Saved Games\DCS\Datatape\datatape.txt
   * C:\Program Files (x86)\VoiceAttack\Datatape\datatape.txt
+  * Other Examples
+    * datatape_alpha_pattern_practice.txt
+    * datatape_bravo_bombing_run.txt
 
-3) If you are already using an existing profile. Configure your existing profile to include the DataTape profile by:
+3) IF YOU USE COMBATFLITE - Export a JSON file from Combat flight and move/rename it to one of the names below
+  * C:\Users\YOUR_USER\Saved Games\DCS.Openbeta\Datatape\datatape.json
+  * C:\Users\YOUR_USER\Saved Games\DCS\Datatape\datatape.json
+  * C:\Program Files (x86)\VoiceAttack\Datatape\datatape.json
+  * Other Examples
+    * datatape_alpha_pattern_practice.json
+    * datatape_bravo_bombing_run.json
+
+4) If you are already using an existing profile. Configure your existing profile to include the DataTape profile by:
  * Click "Edit Profile" (Alt + E) on your existing profile
  * Next to the profile name, click on "Options"
  * In the popup window, click the "..." button next to "Include Commands from other Profiles"
