@@ -12,6 +12,8 @@ Imports System.Threading.Tasks
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Web.Script.Serialization
+Imports System.Xml
+Imports System.Xml.Serialization
 
 Public Class VAInline
 
@@ -31,7 +33,7 @@ Public Class VAInline
 		Dim dir_loc as integer = 0
 		
 		Dim file_found as Boolean = false
-		Dim json_file_found as Boolean = false
+		Dim xml_file_found as Boolean = false
 		Dim datatape_file as string
 		
 		Dim file_code as string
@@ -65,7 +67,11 @@ Public Class VAInline
 		
 		' If no directory was found, then it needs to be created/fixed. Output some insturctions on how to do so.
 		If dir_found = false then
-			VA.WriteToLog("Advanced File Format: datatape_alpha_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			If file_code <> nothing then
+				VA.WriteToLog("Advanced File Format: datatape_"+file_code+"_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			Else
+				VA.WriteToLog("Advanced File Format: datatape_alpha_<ANYTHING_YOU_WANT_HERE>.txt", "red")
+			End If
 			VA.WriteToLog("Basic File Format: datatape.txt", "red")
 			VA.WriteToLog("File name must match one of the following formats:", "red")
 			VA.WriteToLog(dir_locations(2), "red")
@@ -81,12 +87,12 @@ Public Class VAInline
 		VA.SetText("file_code", nothing)
 		
 		' If there is no file code then just load the old style datatape.txt file. Otherwise load one of the new style
-		' Prefer JSON files and fall back to TXT files
+		' Prefer XML files and fall back to TXT files
 		If file_code = "" then
-			If File.exists(datatape_dir + "\datatape.json") then
-				datatape_file = datatape_dir + "\datatape.json"
+			If File.exists(datatape_dir + "\datatape.xml") then
+				datatape_file = datatape_dir + "\datatape.xml"
 				file_found = true
-				json_file_found = true
+				xml_file_found = true
 			Else
 				If File.exists(datatape_dir + "\datatape.txt") then
 					datatape_file = datatape_dir + "\datatape.txt"
@@ -94,11 +100,11 @@ Public Class VAInline
 				End If
 			End If
 		Else
-			datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "*.json")
+			datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "*.xml")
 			If datatape_file <> "" then
 				datatape_file = datatape_dir + "\" + datatape_file
 				file_found = true
-				json_file_found = true
+				xml_file_found = true
 			Else 
 				datatape_file = Dir(datatape_dir + "\datatape_" + file_code + "*.txt")
 				If datatape_file <> "" then
@@ -124,43 +130,70 @@ Public Class VAInline
 		' Main loop. Read the file, trim some fat, and get it plugged into vars	
 		VA.WriteToLog("Reading from datatape file: "+ datatape_file, "blue")
 		
-		' Run a dIfferent loop for JSON files.
+		' Run a dIfferent loop for XML files.
 		
-		If json_file_found = true then
+		If xml_file_found = true then
 		
-			Dim json As String = File.ReadAllText(datatape_file)
-			Dim serializer = New JavaScriptSerializer()
-			Dim data = serializer.Deserialize(Of Object)(json)
+			Dim doc As New XmlDocument()
+			doc.Load(datatape_file)
+			Dim xml As String = File.ReadAllText(datatape_file)
 		
 			Dim stpt as integer = 1
-
-			For Each item As Dictionary(Of String, Object) In data("drawings")
 			
-				If item("type") = "circle" then
-					If stpt > 1 then 
-						VA.WriteToLog("Auto Loading Steerpoint "+stpt.toString()+"- " + item("name"), "green")
-						
-						Dim lat as decimal = item("center_y")
-						Dim formatted_lat as decimal = Math.Round(lat, 6, MidpointRounding.AwayFromZero)
-						
-						Dim lng as decimal = item("center_x")
-						Dim formatted_lng as decimal = Math.Round(lng, 6, MidpointRounding.AwayFromZero)
+			Dim sSerialize As Serializer = New Serializer()
+			
+			Dim objects As Objects = sSerialize.Deserialize(Of Objects)(xml)
+			
+			
+			
+			For Each xml_waypoint As Waypoint In objects.Waypoints
+				If stpt > 1 then											
+						Dim formatted_lat as decimal = Math.Round(xml_waypoint.position.latitude, 6, MidpointRounding.AwayFromZero)
+						Dim formatted_lng as decimal = Math.Round(xml_waypoint.position.longitude, 6, MidpointRounding.AwayFromZero)
 									
 						Dim latitude as string = ConvertLatToDM(formatted_lat)
 						Dim longitude as string = ConvertLongToDM(formatted_lng)
 						Dim waypoint as string = stpt
-						Dim altitude as string = "0"
+						Dim altitude as string = ConvertMetersToFeet(xml_waypoint.position.altitude)
 						' Write to logs and set the variables
+						VA.WriteToLog("loading waypoint from file: "+ waypoint + " " + latitude + " " + longitude + " " + altitude, "blue")
 						VA.SetText("waypoint_"+waypoint, waypoint)
 						VA.SetText("latitude_"+waypoint, latitude)
 						VA.SetText("longitude_"+waypoint, longitude)
 						VA.SetText("altitude_"+waypoint, altitude)
-					End If
-					stpt = stpt + 1
-					
-				End If
-			
+				End if
+				stpt = stpt + 1
 			Next
+				
+
+												
+			'For Each item As Dictionary(Of String, Object) In data("drawings")
+			'
+			'	If item("type") = "circle" then
+			'		If stpt > 1 then 
+			'			VA.WriteToLog("Auto Loading Steerpoint "+stpt.toString()+"- " + item("name"), "green")
+			'			
+			'			Dim lat as decimal = item("center_y")
+			'			Dim formatted_lat as decimal = Math.Round(lat, 6, MidpointRounding.AwayFromZero)
+			'			
+			'			Dim lng as decimal = item("center_x")
+			'			Dim formatted_lng as decimal = Math.Round(lng, 6, MidpointRounding.AwayFromZero)
+			'						
+			'			Dim latitude as string = ConvertLatToDM(formatted_lat)
+			'			Dim longitude as string = ConvertLongToDM(formatted_lng)
+			'			Dim waypoint as string = stpt
+			'			Dim altitude as string = "0"
+			'			' Write to logs and set the variables
+			'			VA.SetText("waypoint_"+waypoint, waypoint)
+			'			VA.SetText("latitude_"+waypoint, latitude)
+			'			VA.SetText("longitude_"+waypoint, longitude)
+			'			VA.SetText("altitude_"+waypoint, altitude)
+			'		End If
+			'		stpt = stpt + 1
+			'		
+			'	End If
+			'
+			'Next
 			
 		
 		Else 
@@ -236,6 +269,17 @@ Public Class VAInline
 		End If
 	End Sub
 	
+	Function ConvertMetersToFeet(ByVal mm As decimal) As string
+	
+		
+		Dim result as decimal = Math.Round(mm * 3.28084)		
+		Dim feet as integer = Math.Truncate(result)
+		
+		ConvertMetersToFeet = feet.toString
+		
+	End Function
+		
+	
 	Function ConvertLatToDM(ByVal dd As decimal) As string
 		
 		Dim result as string = ""
@@ -293,4 +337,59 @@ Public Class VAInline
 		ConvertLongToDM = result + minutes.toString()
 	End Function
 
+End Class
+
+
+
+Public Class Objects
+ 
+   Public Property Waypoints As List(Of Waypoint)
+ 
+End Class
+
+
+Public Class Waypoint
+ 
+   Public Property Name As String
+   Public Property Position As Position
+ 
+End Class
+
+Public Class Position
+ 
+   Public Property Latitude As decimal
+   Public Property Longitude As decimal
+   Public Property Altitude As decimal
+ 
+End Class
+
+Public Class Serializer
+   Public Function Deserialize(Of T As Class) _
+         (ByVal input As String) As T
+ 
+      Dim ser As XmlSerializer = New XmlSerializer(GetType(T))
+ 
+      Using sr As StringReader = New StringReader(input)
+ 
+         Return CType(ser.Deserialize(sr), T)
+ 
+      End Using
+ 
+   End Function
+ 
+   Public Function Serialize(Of T)(ByVal ObjectToSerialize As T) _ 
+   As String
+ 
+      Dim xmlSerializer As XmlSerializer = New XmlSerializer(ObjectToSerialize.[GetType]())
+ 
+      Using textWriter As StringWriter = New StringWriter()
+ 
+         xmlSerializer.Serialize(textWriter, ObjectToSerialize)
+ 
+         Return textWriter.ToString()
+ 
+      End Using
+ 
+   End Function
+ 
 End Class
