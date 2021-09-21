@@ -1,6 +1,9 @@
 # VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
+## New Features in 0.0.9 (Must use 0.0.9 for all DCS builds after 9/15/2021)
+1) Fix for breaking change in DCS F-16 ICP
+
 ## New Features in 0.0.8
 1) Support for CombatFlite XML exports
 2) Support for altitude
