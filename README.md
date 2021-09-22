@@ -1,7 +1,12 @@
 # VA-Datatape for DCS F-16C Viper
 Voice Attack Datatape for the DCS F-16C Viper
 
-## New Features in 0.0.9 (Must use 0.0.9 for all DCS builds after 9/15/2021)
+*SPECIAL NOTE: You must use 0.0.9 or newer for all DCS builds > 2.6.7*
+
+## New Features in 0.0.10
+1) Fix for issue with loading specific steerpoint
+
+## New Features in 0.0.9 
 1) Fix for breaking change in DCS F-16 ICP
 
 ## New Features in 0.0.8
